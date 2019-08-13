@@ -1,6 +1,6 @@
     <div class="main-menu-content">
-        <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-            <li class="active nav-item"><a href="<?= base_url()?>setup"><i class="feather icon-home"></i><span class="menu-title" data-i18n="">Dashboard</span></a>
+        <ul class="navigation navigation-main" id="sidebar" data-menu="menu-navigation">
+            <li class="nav-item"><a href="<?= base_url()?>setup"><i class="feather icon-home"></i><span class="menu-title" data-i18n="">Dashboard</span></a>
             </li>
             <li class="nav-item"><a href="<?= base_url()?>setup/crud"><i class="feather icon-zap"></i><span class="menu-title" data-i18n="">Crudlab</span></a>
             </li>

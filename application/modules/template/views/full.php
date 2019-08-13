@@ -261,6 +261,23 @@
     <!-- BEGIN: Page JS-->
     <script src="<?= base_url()?>assets/js/scripts/pages/dashboard.js"></script>  <!-- Uncomment ini untuk start tour-->
     <?php if(isset($js)){$this->load->view($js);} ?>
+    <script type="text/javascript">
+    $(function(){
+        var current = window.location.href;
+        $('#sidebar li a').each(function(){
+            var $this = $(this);
+            // if the current path is like this link, make it active
+            if($this.attr('href')== current){
+              // alert($this[1]);
+              if($this.parents('.sub-item').length==1){
+                $this.parents('.sub-item').addClass('active');
+              }else{
+                $this.parents('.nav-item').addClass('active');
+              }
+            }
+        })
+    })
+    </script>
     <!-- END: Page JS-->
 
 </body>
