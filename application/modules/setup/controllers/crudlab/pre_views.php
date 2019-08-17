@@ -40,7 +40,7 @@ class Pre_views
       </div>
       <div class=\"card-content\">
         <div class=\"card-body\">
-          <form method=\"post\" action=\"<?php echo base_url().\$action ?>\">";
+          <form method=\"post\" action=\"<?php echo base_url().\$action ?>\" enctype=\"multipart/form-data\">";
           foreach ($fields as $field) {
             if($field->primary_key!=1){
               $string .="<div class=\"form-group row\">
@@ -70,7 +70,7 @@ class Pre_views
       </div>
       <div class=\"card-content\">
         <div class=\"card-body\">
-          <form method=\"post\" action=\"<?php echo base_url().\$action ?>\">
+          <form method=\"post\" action=\"<?php echo base_url().\$action ?>\" enctype=\"multipart/form-data\">
             <div class=\"form-group row\">
               <label class=\"col-sm-2 col-form-label\">$primary_key</label>
               <div class=\"col-sm-10\">
