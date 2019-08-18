@@ -4,7 +4,7 @@ PASTIKAN FOLDER TUJUAN PERMISSION NYA SUDAH BISA WRITE
 dan
 PASTIKAN FORM SUDAH BERUBAH DENGAN enctype="multipart/form-data"
 Keterangan
-upload("Nama Form","Direktori Tujuan","Type File","Enkripsi Nama")
+upload("Nama Form","Direktori Tujuan","Type File","Enkripsi Nama TRUE/FALSE")
 
 contoh
 jika <input type="file" name="photo">
@@ -15,6 +15,14 @@ if($photo){
   echo "foto berhasil di upload";
 }else{
   echo "gagal upload foto";
+}
+
+jika <input type="file" name="pdf">
+$pdf=upload('pdf','pdf','file',TRUE);
+if($pdf){
+  echo "file berhasil di upload";
+}else{
+  echo "gagal upload pdf";
 }
 
 Gunakan class ini untuk FORM create
