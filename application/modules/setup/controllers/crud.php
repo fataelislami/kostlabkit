@@ -40,6 +40,7 @@ class Crud extends MY_Controller{
     $moduleName=safe($this->input->post('moduleTarget'));
     $controllersName=safe($this->input->post('cName'));
     $tableName=safe($this->input->post('tableName'));
+    $serverSide=$this->input->post('serverSide');
     if($moduleName=='' || $controllersName==''){
       echo "<script>alert('form tidak lengkap')</script>";
       redirect(base_url('setup/crud'));
@@ -84,13 +85,13 @@ class Crud extends MY_Controller{
     $moduleBundle=$pre_modules->createControllers(ucfirst($moduleName));
     $moduleBundleSidebar=$pre_modules->createSidebar($moduleName);
     $moduleBundleDashboard=$pre_modules->createDashboard();
-    $controllerBundle=$pre_controllers->create($controller,$primary_key,$fields,$model,$moduleName,$viewForm,$viewEdit,$viewList);
-    $modelBundle=$pre_models->create($model,$primary_key,$tableName);
+    $controllerBundle=$pre_controllers->create($controller,$primary_key,$fields,$model,$moduleName,$viewForm,$viewEdit,$viewList,$serverSide);
+    $modelBundle=$pre_models->create($model,$primary_key,$tableName,$fields);
     $viewFormBundle=$pre_views->createForm($fields);
     $viewEditBundle=$pre_views->createEdit($primary_key,$fields,$controller);
-    $viewListBundle=$pre_views->createList($primary_key,$controllersName);
+    $viewListBundle=$pre_views->createList($primary_key,$controllersName,$serverSide);
     $viewCssBundle=$pre_views->createCss();
-    $viewJsBundle=$pre_views->createJs();
+    $viewJsBundle=$pre_views->createJs($serverSide,$moduleName,$controller);
 
     //Mengecek Direktori Module
     if (!file_exists($pathModule)){

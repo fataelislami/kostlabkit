@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Pre_controllers{
 
 
-  function create($controller,$primary_key,$fields,$model,$moduleName,$viewForm,$viewEdit,$viewList)
+  function create($controller,$primary_key,$fields,$model,$moduleName,$viewForm,$viewEdit,$viewList,$serverSide)
   {
     $class=$controller;
     $moduleName=strtolower($moduleName);
@@ -21,12 +21,21 @@ class Pre_controllers{
             parent::__construct();
             \$this->load->model('$model');
             \$this->load->library('form_validation');
+            // if(\$method != 'ajax_list'){
+            //   if(\$this->session->userdata('status')!='login'){
+            //     redirect(base_url('login'));
+            //   }
+            // }
         }
 
         public function index()
-        {
-
-          \$data$controller=\$this->$model"."->get_all();//panggil ke modell
+        {";
+          if($serverSide==0){
+          $string .="\$data$controller=\$this->$model"."->get_all();//panggil ke modell";
+        }else{
+          $string .="\$data$controller=\$this->$model"."->getDataTable();//panggil ke modell";
+        }
+        $string .="
           \$datafield=\$this->$model"."->get_field();//panggil ke modell
 
            \$data = array(
@@ -42,6 +51,38 @@ class Pre_controllers{
             );
           \$this->template->load(\$data);
         }
+
+        //DataTable
+        public function ajax_list()
+      {
+          \$list = \$this->$model"."->get_datatables();
+          \$data = array();
+          \$no = \$_POST['start'];
+          foreach (\$list as \$$model) {
+              \$no++;
+              \$row = array();
+              \$row[] = \$no;";
+              foreach ($fields as $field) {
+                if($field->primary_key!=1){
+                $string .="\$row[] = \$$model->$field->name;";
+              }
+              }
+              $string .="
+              \$row[] =\"
+              <a href='$controller/edit/\$$model->$primary_key'><i class='m-1 feather icon-edit-2'></i></a>
+              <a class='modalDelete' data-toggle='modal' data-target='#responsive-modal' value='\$$model->$primary_key' href='#'><i class='feather icon-trash'></i></a>\";
+              \$data[] = \$row;
+          }
+
+          \$output = array(
+                          \"draw\" => \$_POST['draw'],
+                          \"recordsTotal\" => \$this->$model"."->count_all(),
+                          \"recordsFiltered\" => \$this->$model"."->count_filtered(),
+                          \"data\" => \$data,
+                  );
+          //output to json format
+          echo json_encode(\$output);
+      }
 
 
         public function create(){

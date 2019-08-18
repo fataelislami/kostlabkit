@@ -9,7 +9,7 @@ class Pre_views
     <link rel=\"stylesheet\" type=\"text/css\" href=\"<?= base_url() ?>assets/vendors/css/tables/datatable/datatables.min.css\">"; //ini isi pake syntax php
     return $string;
   }
-  function createJs(){
+  function createJs($serverSide,$module,$controller){
     $string="<!-- BEGIN: Page Vendor JS-->
     <script src=\"<?= base_url()?>assets/vendors/js/tables/datatable/vfs_fonts.js\"></script>
     <script src=\"<?= base_url()?>assets/vendors/js/tables/datatable/datatables.min.js\"></script>
@@ -18,8 +18,32 @@ class Pre_views
     <!-- END: Page Vendor JS-->
     <script src=\"<?= base_url()?>assets/js/scripts/datatables/datatable.min.js\"></script>
     <script type=\"text/javascript\">
-      $(document).ready(function(){
-        $('.crudtable').DataTable();
+      $(document).ready(function(){";
+        if($serverSide==0){
+          $string .="$('.crudtable').DataTable();";
+        }else{
+          $string .="$('.crudtable').DataTable({
+            \"processing\": true, //Feature control the processing indicator.
+            \"serverSide\": true, //Feature control DataTables' server-side processing mode.
+            \"order\": [], //Initial no order.
+
+            // Load data for the table's content from an Ajax source
+            \"ajax\": {
+                \"url\": \"<?php echo base_url()?>$module/$controller/ajax_list\",
+                \"type\": \"POST\"
+            },
+
+            //Set column definition initialisation properties.
+            \"columnDefs\": [
+            {
+                \"targets\": [ 0 ], //first column / numbering column
+                \"orderable\": false, //set not orderable
+            },
+            ],
+        });
+            ";
+        }
+        $string .="
       });
     </script>
     <script type=\"text/javascript\">
@@ -101,7 +125,7 @@ class Pre_views
     return $string;
   }
 
-  function createList($primarykey,$controller){
+  function createList($primarykey,$controller,$serverSide){
     $controller=strtolower($controller);
     $string="<?php if(\$this->session->flashdata('message')) {
       \$flashMessage=\$this->session->flashdata('message');
@@ -131,7 +155,9 @@ class Pre_views
                                            <th>aksi</th>
                                        </tr>
                                      </thead>
-                                     <tbody>
+                                     <tbody>";
+                                      if($serverSide==0){
+                                        $string .="
                                        <?php foreach (\$data$controller as \$d): ?>
                                          <tr>
                                            <?php foreach (\$datafield as \$df): ?>
@@ -144,8 +170,9 @@ class Pre_views
 
                                          </tr>
                                        <?php endforeach; ?>
-
-                                     </tbody>
+                                       ";
+                                     }
+                                     $string .="</tbody>
                                      <tfoot>
                                        <tr>
                                            <?php foreach (\$datafield as \$d): ?>

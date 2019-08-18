@@ -28,6 +28,15 @@
                 <input type="text" class="form-control" name="cName">
               </div>
             </div>
+            <div class="form-group row">
+              <label for="example-text-input" class="col-sm-2 col-form-label">Tipe Datatable</label>
+              <div class="col-sm-10">
+                <select class="form-control" name="serverSide">
+                  <option value="0">ClientSide</option>
+                  <option value="1">ServerSide</option>
+                </select>
+              </div>
+            </div>
             <button type="submit" class="btn btn-rounded btn-primary btn-outline">
               <i class="ti-save-alt"></i> Generate
             </button>
