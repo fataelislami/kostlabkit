@@ -15,6 +15,7 @@ class Pre_models{
         public \$table = '$tableName';
         public \$id = '$primaryKey';
         public \$order = array('id' => 'asc');
+        public \$select='*';
 
         function __construct()
         {
@@ -43,7 +44,7 @@ class Pre_models{
         }
 
         function getDataTable(){
-            \$this->db->select('*');
+            \$this->db->select(\$this->select);
             \$this->db->order_by(\$this->id, 'DESC');
             return \$this->db->get(\$this->table)->result();
         }
@@ -52,7 +53,8 @@ class Pre_models{
 
         function get_field(){
           \$table=\$this->table;
-          \$sql=\$this->db->query(\"SELECT * FROM `\$table`\"); //ganti * untuk custom field yang ditampilkan pada table
+          \$this->db->select(\$this->select); //ganti * untuk custom field yang ditampilkan pada table
+          \$sql=\$this->db->get(\$this->table); //ganti * untuk custom field yang ditampilkan pada table
           return \$sql->list_fields();
         }
 
@@ -86,7 +88,7 @@ class Pre_models{
         //Datatable
         private function _get_datatables_query()
           {
-              \$this->db->select('*');
+              \$this->db->select(\$this->select);
               \$this->db->from(\$this->table);
 
               \$i = 0;
