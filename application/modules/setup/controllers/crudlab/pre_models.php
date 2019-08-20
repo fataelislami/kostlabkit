@@ -21,15 +21,15 @@ class Pre_models{
             parent::__construct();
             \$this->column_order=[];
             \$this->column_search=[];
-            \$this->column_order[]=null;";
+            \$this->column_order[]=null;\n\t\t\t\t\t\t\t";
             foreach ($fields as $field) {
               if($field->primary_key!=1){
-              $string .="\$this->column_order[]='$field->name';";
+              $string .="\$this->column_order[]='$field->name';\n\t\t\t\t\t\t\t";
             }
             }
             foreach ($fields as $field) {
               if($field->primary_key!=1){
-              $string .="\$this->column_search[]='$field->name';";
+              $string .="\$this->column_search[]='$field->name';\n\t\t\t\t\t\t\t";
             }
             }
             $string .="

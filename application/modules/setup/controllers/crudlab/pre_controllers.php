@@ -61,10 +61,10 @@ class Pre_controllers{
           foreach (\$list as \$$model) {
               \$no++;
               \$row = array();
-              \$row[] = \$no;";
+              \$row[] = \$no;\n\t\t\t\t\t\t\t";
               foreach ($fields as $field) {
                 if($field->primary_key!=1){
-                $string .="\$row[] = \$$model->$field->name;";
+                $string .="\$row[] = \$$model->$field->name;\n\t\t\t\t\t\t\t";
               }
               }
               $string .="
