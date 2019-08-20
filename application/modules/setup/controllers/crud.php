@@ -65,7 +65,7 @@ class Crud extends MY_Controller{
     //Init Data
     $controller = $controllersName <> '' ? ucfirst($controllersName) : ucfirst($tableName);
     $model = $controllersName <> '' ? ucfirst($controllersName."_model") : ucfirst($tableName) . '_model';
-    $viewForm = $tableName . "_form";
+    $viewForm = $tableName . "_create";
     $viewEdit = $tableName . "_edit";
     $viewList = $tableName . "_list";
     $viewCss = "css";
