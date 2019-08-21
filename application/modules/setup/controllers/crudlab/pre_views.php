@@ -6,7 +6,9 @@ class Pre_views
 {
   function createCss(){
     $string="<link rel=\"stylesheet\" type=\"text/css\" href=\"<?= base_url() ?>assets/vendors/css/vendors.min.css\">
-    <link rel=\"stylesheet\" type=\"text/css\" href=\"<?= base_url() ?>assets/vendors/css/tables/datatable/datatables.min.css\">"; //ini isi pake syntax php
+    <link rel=\"stylesheet\" type=\"text/css\" href=\"<?= base_url() ?>assets/vendors/css/tables/datatable/datatables.min.css\">
+    <link rel=\"stylesheet\" type=\"text/css\" href=\"<?= base_url() ?>assets/summernote/summernote.css\">
+    <link rel=\"stylesheet\" type=\"text/css\" href=\"<?= base_url() ?>assets/dropify/dist/css/dropify.css\">"; //ini isi pake syntax php
     return $string;
   }
   function createJs($serverSide,$module,$controller){
@@ -16,6 +18,12 @@ class Pre_views
     <script src=\"<?= base_url()?>assets/vendors/js/tables/datatable/datatables.buttons.min.js\"></script>
     <script src=\"<?= base_url()?>assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js\"></script>
     <!-- END: Page Vendor JS-->
+    <!-- BEGIN: Dropify JS -->
+    <script src=\"<?= base_url()?>assets/dropify/dist/js/dropify.js\" charset=\"utf-8\"></script>
+    <script type=\"text/javascript\">
+    $('.dropify').dropify();
+    </script>
+    <!-- END: Dropify JS -->
     <script src=\"<?= base_url()?>assets/js/scripts/datatables/datatable.min.js\"></script>
     <script type=\"text/javascript\">
       $(document).ready(function(){";
@@ -54,7 +62,16 @@ class Pre_views
           $(\"#modalHref\").attr(\"href\", \"<?php echo base_url().\$module?>/<?php echo \$controller; ?>/delete/\"+id);
         });
       });
-    </script>"; //ini isi pake syntax php
+    </script>
+    <script src=\"<?= base_url()?>assets/summernote/summernote.js\" charset=\"utf-8\"></script>
+    <script type=\"text/javascript\">
+    $(document).ready(function() {
+      $('.summernote').summernote({
+        height: 300
+      });
+      });
+    </script>
+    "; //ini isi pake syntax php
     return $string;
   }
   function createForm($fields){
