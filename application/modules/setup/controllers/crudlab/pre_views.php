@@ -21,7 +21,23 @@ class Pre_views
     <!-- BEGIN: Dropify JS -->
     <script src=\"<?= base_url()?>assets/dropify/dist/js/dropify.js\" charset=\"utf-8\"></script>
     <script type=\"text/javascript\">
-    $('.dropify').dropify();
+    var drEvent = $('.dropify').dropify();
+    var initFiles=null;
+
+    drEvent.on('dropify.beforeClear', function(event, element){
+      // console.log(element);
+      initFiles=element.file.name;
+        return confirm('Do you really want to delete ' + element.file.name +' ?');
+    });
+    drEvent.on('dropify.afterClear', function(event, element) {
+      console.log(element);
+      if(element.file.name==null){
+        $(\"#deleteFiles\").val(initFiles);
+      }else{
+        console.log('not deleted');
+      }
+        alert('File deleted');
+    });
     </script>
     <!-- END: Dropify JS -->
     <script src=\"<?= base_url()?>assets/js/scripts/datatables/datatable.min.js\"></script>
@@ -81,15 +97,15 @@ class Pre_views
       </div>
       <div class=\"card-content\">
         <div class=\"card-body\">
-          <form method=\"post\" action=\"<?php echo base_url().\$action ?>\" enctype=\"multipart/form-data\">";
+          <form method=\"post\" action=\"<?php echo base_url().\$action ?>\" enctype=\"multipart/form-data\">\n";
           foreach ($fields as $field) {
             if($field->primary_key!=1){
-              $string .="<div class=\"form-group row\">
+              $string .="\t\t\t\t\t\t<div class=\"form-group row\">
                 <label class=\"col-sm-2 col-form-label\">$field->name</label>
                 <div class=\"col-sm-10\">
                   <input type=\"text\" name=\"$field->name\" class=\"form-control\">
                 </div>
-              </div>";
+              </div>\n";
             }
 
           }
@@ -117,20 +133,21 @@ class Pre_views
               <div class=\"col-sm-10\">
                 <input type=\"text\" name=\"$primary_key\" class=\"form-control\" placeholder=\"\" value=\"<?php echo \$dataedit->$primary_key?>\" readonly>
               </div>
-            </div>";
+            </div>\n";
             foreach ($fields as $field) {
               if($field->primary_key!=1){
-                $string .="<div class=\"form-group row\">
-                              <label for=\"example-text-input\" class=\"col-sm-2 col-form-label\">$field->name</label>
-                              <div class=\"col-sm-10\">
-                                <input type=\"text\" name=\"$field->name\" class=\"form-control\" value=\"<?php echo \$dataedit->$field->name?>\">
-                              </div>
-                            </div>";
+                $string .="\t\t\t\t\t\t<div class=\"form-group row\">
+              <label for=\"example-text-input\" class=\"col-sm-2 col-form-label\">$field->name</label>
+              <div class=\"col-sm-10\">
+                <input type=\"text\" name=\"$field->name\" class=\"form-control\" value=\"<?php echo \$dataedit->$field->name?>\">
+              </div>
+              </div>\n";
               }
 
             }
             $string .="
         </div>
+        <input type=\"hidden\" id=\"deleteFiles\" name=\"deleteFiles\">
         <div class=\"col-12\">
           <button type=\"submit\" class=\"btn btn-primary mr-1 mb-1 waves-effect
            waves-light float-right\">Simpan</button>
