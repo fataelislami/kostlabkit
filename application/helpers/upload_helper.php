@@ -12,6 +12,7 @@ dengan folder tujuan photo
 maka
 $photo=upload('photo','photo','image',TRUE);
 if($photo){
+  //$photo['file_name']; //Untuk mengambil nama file, dan masukan ke database
   echo "foto berhasil di upload";
 }else{
   echo "gagal upload foto";
@@ -20,6 +21,7 @@ if($photo){
 jika <input type="file" name="pdf">
 $pdf=upload('pdf','pdf','file',TRUE);
 if($pdf){
+  //$pdf['file_name']; //Untuk mengambil nama file, dan masukan ke database
   echo "file berhasil di upload";
 }else{
   echo "gagal upload pdf";
@@ -35,7 +37,7 @@ Gunaka class ini untuk Form Edit, dan ubah default URL nya
 
  function upload($formname,$pathFolder,$type='image',$encrypt=FALSE){//default untuk image
     $ci =& get_instance();//$ci untuk pengganti $this->
-    $config['upload_path']          = './xfile/'.$pathFolder;
+    $config['upload_path']          = './upload/'.$pathFolder;
     if($type=='file'){
       $config['allowed_types']        = 'pdf';
       //$config['max_size']             = 100;
