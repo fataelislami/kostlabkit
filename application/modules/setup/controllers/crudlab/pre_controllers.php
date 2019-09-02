@@ -21,6 +21,7 @@ class Pre_controllers{
             parent::__construct();
             \$this->load->model('$model');
             \$this->load->library('form_validation');
+	    \$method=\$this->router->fetch_method();
             // if(\$method != 'ajax_list'){
             //   if(\$this->session->userdata('status')!='login'){
             //     redirect(base_url('login'));
