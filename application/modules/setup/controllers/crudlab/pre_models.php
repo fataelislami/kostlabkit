@@ -14,7 +14,7 @@ class Pre_models{
     {
         public \$table = '$tableName';
         public \$id = '$primaryKey';
-        public \$order = array('id' => 'asc');
+        public \$order = array('$primaryKey' => 'asc');
         public \$select='*';
 
         function __construct()
