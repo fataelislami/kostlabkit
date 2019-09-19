@@ -41,7 +41,7 @@ class Pre_modules{
   }
 
   function createSidebar($moduleName){
-    $controller=strtolower($moduleName);
+    $moduleName=strtolower($moduleName);
     $string="<div class=\"main-menu-content\">
             <ul class=\"navigation navigation-main\" id=\"sidebar\" data-menu=\"menu-navigation\">
                 <li class=\"nav-item\"><a href=\"<?= base_url()?>$moduleName\"><i class=\"feather icon-home\"></i><span class=\"menu-title\" data-i18n=\"\">Dashboard</span></a>

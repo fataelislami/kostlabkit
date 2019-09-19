@@ -53,7 +53,7 @@ class Pre_views
 
             // Load data for the table's content from an Ajax source
             \"ajax\": {
-                \"url\": \"<?php echo base_url()?>$module/$controller/ajax_list\",
+                \"url\": \"<?php echo base_url()?>".strtolower($module)."/$controller/ajax_list\",
                 \"type\": \"POST\"
             },
 

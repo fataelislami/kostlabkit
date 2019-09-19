@@ -37,7 +37,7 @@ class Crud extends MY_Controller{
     $pre_modules=new Pre_modules();
     $pre_views=new Pre_views();
     //Terima dari form generator kostlab
-    $moduleName=safe($this->input->post('moduleTarget'));
+    $moduleName=strtolower(safe($this->input->post('moduleTarget')));
     $controllersName=safe($this->input->post('cName'));
     $tableName=safe($this->input->post('tableName'));
     $serverSide=$this->input->post('serverSide');
@@ -79,7 +79,7 @@ class Crud extends MY_Controller{
     $pathControllers=$pathModule."/controllers";
     $pathModels=$pathModule."/models";
     $pathViews=$pathModule."/views";
-    $pathViewsCrud=$pathViews."/".$controllersName;
+    $pathViewsCrud=$pathViews."/".strtolower($controllersName);
 
     //Memasukan semua nilai yang ada di builder crudlab
     $moduleBundle=$pre_modules->createControllers(ucfirst($moduleName));
